@@ -1,0 +1,45 @@
+package telinhas;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+
+public class Principal extends JFrame{
+	
+	ImageIcon imagem = new ImageIcon(getClass().getResource("TelaInicial.png"));
+	JLabel label = new JLabel(imagem);
+//	JMenuBar barra = new JMenuBar();
+	
+	public JButton cadVendas, cadEstoque, consVendas, consEstoque;
+	
+	
+	public Principal() {
+		setTitle("BIJULINX");
+		setSize(600,400);
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
+		 cadVendas = new JButton("");
+	        cadVendas .setLayout(null);
+	        cadVendas.setBounds(28, 76, 75, 29);
+	        cadVendas.setBorderPainted(false);
+	        cadVendas.setContentAreaFilled(false);
+	        cadVendas.setFocusPainted(false);
+		
+		add(label);
+		//add(barra);
+		add(cadVendas);
+		
+	}
+	
+	public static void main(String [] args) {
+		Principal principal = new Principal();
+	}
+}
