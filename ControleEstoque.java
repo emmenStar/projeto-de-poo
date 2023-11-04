@@ -96,7 +96,7 @@ public class ControleEstoque extends JFrame {
         
         customButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
-        Dimension tamanhoBotao = new Dimension(100, 30); // Ajuste as dimensões conforme necessário
+        Dimension tamanhoBotao = new Dimension(80, 30); // Ajuste as dimensões conforme necessário
         customButton.setPreferredSize(tamanhoBotao);
         
         panel.add(customButton, c);
