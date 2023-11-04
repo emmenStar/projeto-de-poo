@@ -1,45 +1,74 @@
-package telinhas;
+package SistemaBijux;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 
-public class Principal extends JFrame{
-	
-	ImageIcon imagem = new ImageIcon(getClass().getResource("TelaInicial.png"));
-	JLabel label = new JLabel(imagem);
-//	JMenuBar barra = new JMenuBar();
-	
-	public JButton cadVendas, cadEstoque, consVendas, consEstoque;
-	
-	
-	public Principal() {
-		setTitle("BIJULINX");
-		setSize(600,400);
-		setLayout(new BorderLayout());
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		
-		 cadVendas = new JButton("");
-	        cadVendas .setLayout(null);
-	        cadVendas.setBounds(28, 76, 75, 29);
-	        cadVendas.setBorderPainted(false);
-	        cadVendas.setContentAreaFilled(false);
-	        cadVendas.setFocusPainted(false);
-		
-		add(label);
-		//add(barra);
-		add(cadVendas);
-		
-	}
-	
-	public static void main(String [] args) {
-		Principal principal = new Principal();
-	}
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Dimension;
+import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Principal extends JFrame {
+    JLabel label = new JLabel();
+
+    public Principal() {
+        setTitle("BijuGerencia");
+        setSize(600, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        // Defina a cor de fundo do JFrame
+        getContentPane().setBackground(new Color(243, 215, 241)); // Defina a cor desejada
+
+        // Criar um JPanel para a barra colorida
+        JPanel barraColorida = new JPanel();
+        Color corBarra = new Color(246, 59, 116);
+        barraColorida.setBackground(corBarra); // Defina a cor desejada
+        barraColorida.setPreferredSize(new Dimension(600, 50)); // Ajuste a altura da barra
+
+        // Adicionar a barra colorida e o JLabel à janela
+        add(barraColorida, BorderLayout.NORTH); // Coloque a barra na parte superior
+        add(label, BorderLayout.CENTER);
+
+        // Criar um botão
+        JButton botao = new JButton("Menu");
+        botao.setBounds(2, 10, 70, 25); // Ajuste o tamanho e a posição do botão
+
+        // Adicionar ação ao botão
+        botao.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Ação a ser realizada quando o botão é clicado
+                JOptionPane.showMessageDialog(null, "Botão foi clicado!");
+            }
+        });
+
+        barraColorida.add(botao); // Adicionar o botão à janela
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Principal principal = new Principal();
+        });
+    }
 }
