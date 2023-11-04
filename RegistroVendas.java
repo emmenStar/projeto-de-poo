@@ -1,3 +1,23 @@
+package SistemaBijux;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
 public class RegistroVendas extends JFrame {
     
 	public RegistroVendas() {
@@ -63,8 +83,6 @@ public class RegistroVendas extends JFrame {
         c.gridy = 5;
         panel.add(textField3, c);
         
-        Date data1 = new Date();
-        String data = new SimpleDateFormat("dd/MM/yy").format(data1);
         
         JLabel label4 = new JLabel("Valor:");
         c.gridx = 0;
@@ -87,7 +105,7 @@ public class RegistroVendas extends JFrame {
         
         customButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         
-        Dimension tamanhoBotao = new Dimension(100, 30); // Ajuste as dimensões conforme necessário
+        Dimension tamanhoBotao = new Dimension(80, 30); // Ajuste as dimensões conforme necessário
         customButton.setPreferredSize(tamanhoBotao);
         
         panel.add(customButton, c);
