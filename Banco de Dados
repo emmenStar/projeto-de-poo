@@ -1,23 +1,23 @@
 CREATE database GERENCIAMENTO;
 USE GERENCIAMENTO;
- 
- CREATE TABLE DADOSCLIENTES(
+
+CREATE TABLE Cliente(
  ID INT PRIMARY KEY AUTO_INCREMENT,
- CLIENTE varchar(30) NOT NULL,
- DESCPROD varchar(100) NOT NULL,
- DATAVENDA date NOT NULL,
- VALORPROD decimal NOT NULL
- );
+ nomeCliente varchar(30) NOT NULL,
+ nomeProduto varchar(30) NOT NULL,
+ dataCompra date NOT NULL,
+ valorProduto decimal NOT NULL
+);
 
- CREATE TABLE CONTROLEESTOQUE(
+CREATE TABLE Produto(
  ID INT PRIMARY KEY AUTO_INCREMENT,
- DESCPROD varchar(100) NOT NULL,
- QUANTIDADE INT NOT NULL,
- DATAESTOQUE date NOT NULL,
- VALORESTOQUE decimal NOT NULL
- );
+ nomeProduto varchar(100) NOT NULL,
+ qtddProduto INT NOT NULL,
+ dataEntrada date NOT NULL,
+ valor decimal NOT NULL
+);
 
-select*FROM DADOSCLIENTES;
+select*FROM Cliente;
 
-insert INTO DADOSCLIENTES(ID, CLIENTE, DESCPROD, DATAVENDA, VALORPROD)
-values(1, "MARIA", "PULSEIRAROSA", '23/11/02', 10);
+insert INTO Cliente(ID, nomeCliente, nomeProduto, dataCompra, valorProduto)
+values(1, "MARIA", "PULSEIRA", '23/11/02', 10);
