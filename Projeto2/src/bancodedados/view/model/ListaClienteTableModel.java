@@ -1,7 +1,6 @@
 package bancodedados.view.model;
 
 import control.ClienteController;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -11,12 +10,12 @@ public class ListaClienteTableModel extends AbstractTableModel {
     private String[] titulos;
 
     public ListaClienteTableModel() {
-        titulos = new String[]{"Nome Cliente", "Nome Produto", "Data", "Valor"};
+        titulos = new String[]{"Nome Cliente", "Nome Produto", "Data de compra", "Valor do produto"};
         dadosClientes = new ClienteController().listarClientes();
     }
 
     public ListaClienteTableModel(List<String[]> dadosClientes) {
-        titulos = new String[]{"Nome Cliente", "Nome Produto", "Data", "Valor"};
+        titulos = new String[]{"Nome Cliente", "Nome Produto", "Data de compra", "Valor do produto"};
         this.dadosClientes = dadosClientes;
     }
 
