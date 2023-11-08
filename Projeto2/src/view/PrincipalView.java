@@ -9,72 +9,97 @@ import java.awt.event.ActionListener;
 
 public class PrincipalView extends JFrame {
     JMenuBar menubar;
-    JMenu mConfig;
-    JMenuItem miCadastrar, miConsultar, miSair;
-
-    ImageIcon imagemIcon = new ImageIcon("img/logo.png");
-    JLabel imagemLabel = new JLabel(imagemIcon);
+    JMenu mConfig, mConfig1;
+    JMenuItem miCadastrar, miConsultar;   
+    private JLabel lblImageBackground;
 
     public PrincipalView() {
         setTitle("BijuGerencia");
-        setSize(600, 400);
+        setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-
-        Container cont = getContentPane();
+       
+        Container c = getContentPane();
 
         // Painel central
         JPanel painelCentral = new JPanel();
-        cont.add(painelCentral);
-
-        painelCentral.add(imagemLabel);
-
-        Color corDeFundo = new Color(243, 215, 241);
-        painelCentral.setBackground(corDeFundo);
-
+        c.add(painelCentral);
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));	
+        lblImageBackground = new JLabel();
+        lblImageBackground.setIcon(icon); //coloca a imagem na label
+        painelCentral.add(lblImageBackground);
+        getContentPane().add(painelCentral, BorderLayout.CENTER);
+        
         menubar = new JMenuBar();
-        mConfig = new JMenu("Menu");
-        JMenuItem miRegistro = new JMenuItem("Cadastrar Cliente");
-        JMenuItem miControle = new JMenuItem("Cadastrar Produto");
+        mConfig = new JMenu("Cadastrar");
+        JMenuItem micadastrarCliente = new JMenuItem("Cliente");
+        JMenuItem micadastrarProduto = new JMenuItem("Produto");
 
-        mConfig.add(miRegistro);
-        mConfig.add(miControle);
+        mConfig.add(micadastrarCliente);
+        mConfig.add(micadastrarProduto);
         menubar.add(mConfig);
+        
+        mConfig1 = new JMenu("Consultar");
+        JMenuItem miconsultarClientes = new JMenuItem("Clientes");
+        JMenuItem miconsultarProdutos = new JMenuItem("Produtos");
+
+        mConfig1.add(miconsultarClientes);
+        mConfig1.add(miconsultarProdutos);
+        menubar.add(mConfig1);
 
         // Defina a cor de fundo do JMenuBar usando RGB
-        menubar.setBackground(new Color(246, 59, 116)); // Cor de fundo em RGB
+        menubar.setBackground(new Color(80, 140, 172)); // Cor de fundo em RGB
 
         // Defina cores RGB personalizadas para os itens do menu
-        Color corMenu = new Color(246, 59, 116); // Cor vermelha (RGB)
-        miRegistro.setBackground(corMenu);
-        miControle.setBackground(corMenu);
-
-        // Crie uma borda personalizada para os itens do menu
-        Border bordaMenuItem = BorderFactory.createLineBorder(Color.BLACK, 1); // Borda preta de 1 pixel
-
-        // Defina a borda personalizada para os itens do menu
-        miRegistro.setBorder(bordaMenuItem);
-        miControle.setBorder(bordaMenuItem);
-
+        Color corMenu = new Color(243, 215, 241); // Cor vermelha (RGB)
+        micadastrarCliente.setBackground(corMenu);
+        micadastrarProduto.setBackground(corMenu);
+        miconsultarClientes.setBackground(corMenu);
+        miconsultarProdutos.setBackground(corMenu);
+        
         setJMenuBar(menubar);
 
-        miRegistro.addActionListener(new ActionListener() {
+        micadastrarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Código para lidar com a ação de miRegistro
                 dispose();
-                CadastrarCliente registroV = new CadastrarCliente();
-                registroV.setVisible(true);
+                CadastrarCliente cadastrarCliente = new CadastrarCliente();
+                cadastrarCliente.setVisible(true);
             }
         });
 
-        miControle.addActionListener(new ActionListener() {
+        micadastrarProduto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Código para lidar com a ação de miControle
                 dispose();
-                CadastrarProduto controleE = new CadastrarProduto();
-                controleE.setVisible(true);
+                CadastrarProduto cadastrarProduto = new CadastrarProduto();
+                cadastrarProduto.setVisible(true);
             }
         });
+        
+        miconsultarClientes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Código para lidar com a ação de miRegistro
+                dispose();
+                ConsultarClientes consultarClientes = new ConsultarClientes();
+                consultarClientes.setVisible(true);
+            }
+        });
+
+        miconsultarProdutos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Código para lidar com a ação de miControle
+                dispose();
+                ConsultarProdutos consultarProdutos = new ConsultarProdutos();
+                //consultarProdutos.setVisible(true);
+            }
+        });
+    }
+    
+    public static void main(String []args) {
+    	PrincipalView principal = new PrincipalView();
+    	principal.setVisible(true);
     }
 }
