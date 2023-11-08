@@ -1,9 +1,7 @@
-package bancodedados.view.model;
+ppackage bancodedados.view.model;
 
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import control.ProdutoController;
 
 public class ListaProdutoTableModel extends AbstractTableModel {
@@ -12,12 +10,12 @@ public class ListaProdutoTableModel extends AbstractTableModel {
     private String[] titulos;
 
     public ListaProdutoTableModel() {
-        titulos = new String[]{"Nome Produto", "Quantidade Produto", "Data de Entrada", "Valor"};
+        titulos = new String[]{"Nome Produto", "Quantidade Produto", "Data de Entrada", "Valor do produto"};
         dadosProdutos = new ProdutoController().listarProdutos();
     }
 
     public ListaProdutoTableModel(List<String[]> dadosProdutos) {
-        titulos = new String[]{"Nome Produto", "Quantidade Produto", "Data de Entrada", "Valor"};
+        titulos = new String[]{"Nome Produto", "Quantidade Produto", "Data de Entrada", "Valor do produto"};
         this.dadosProdutos = dadosProdutos;
     }
 
