@@ -1,141 +1,138 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.swing.*;
+import control.ProdutoController;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CadastrarProduto extends JFrame {
+public class CadastrarProduto extends JFrame implements ActionListener {
 
-    Color corButton = new Color(60, 179, 113);
-    Dimension tamanhoBotaoEnviar = new Dimension(80, 30);
+    private JLabel lblnomeProduto, lblqtddProduto, lbldataEntrada, lblvalorProduto;
+    private JTextField txtnomeProduto, txtqtddProduto, txtdataEntrada, txtvalorProduto;
+    private JPanel painelCenter, painelBotao;
+    private JButton btnVoltar, btnCadastrar, btnCancelar;
+
+    private BorderLayout layoutPai;
+    private FlowLayout layoutBotao;
 
     public CadastrarProduto() {
-        // Configurar o título, tamanho e ação de fechamento da janela
-        setTitle("Cadastrar produto");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setTitle("Cadastrar Produto");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Configurar a borda da janela
-        LineBorder borda = new LineBorder(Color.BLACK, 2);
-        getRootPane().setBorder(borda);
-
-        // Criar um painel com um layout GridBagLayout
-        JPanel panel = new JPanel(new GridBagLayout());
-        add(panel);
-
-        // Configurar a cor de fundo do painel
-        Color corDeFundo = new Color(243, 215, 241);
-        panel.setBackground(corDeFundo);
-
-        // Configuração de GridBagConstraints para o layout GridBagLayout
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(3, 5, 5, 10);
-
-        // Label e TextArea para a Descrição do Produto
-        JLabel label = new JLabel("Produto:");
-        c.gridx = 0;
-        c.gridy = 0;
-        panel.add(label, c);
-
-        JTextArea textArea = new JTextArea(5, 30);
-        c.gridx = 0;
-        c.gridy = 1;
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        panel.add(textArea, c);
-        panel.add(scrollPane, c);
+        Container c = getContentPane();
         
-     // Adicionar um botão "Voltar" ao lado do botão "Enviar"
-        JButton btnVoltar = new JButton("Voltar");
-        c.gridx = 1; // Coloca o botão "Voltar" ao lado do botão "Enviar"
-        c.gridy = 0;
-        btnVoltar.setPreferredSize(tamanhoBotaoEnviar);
-        btnVoltar.setBackground(corButton);
-        //btnVoltar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1);
+        layoutPai = new BorderLayout();
+        c.setLayout(layoutPai);
 
-        btnVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Código para lidar com a ação de miControle
-                dispose();
-                PrincipalView principal = new PrincipalView();
-                principal.setVisible(true);
-            }
-        });
+        painelCenter = new JPanel();
+        painelCenter.setLayout(null);
+        
+        Color corDeFundo = new Color(243, 215, 241);
+        painelCenter.setBackground(corDeFundo);
 
-        panel.add(btnVoltar, c);
+        painelBotao = new JPanel();
+        layoutBotao = new FlowLayout(FlowLayout.CENTER, 25, 15);
+        painelBotao.setLayout(layoutBotao);
 
-        // Label e TextField para a Quantidade
-        JLabel label2 = new JLabel("Quantidade:");
-        c.gridx = 0;
-        c.gridy = 2;
-        panel.add(label2, c);
+        c.add(painelCenter, BorderLayout.CENTER);
+        c.add(painelBotao, BorderLayout.SOUTH);
 
-        JTextField textField = new JTextField(20);
-        c.gridx = 0;
-        c.gridy = 3;
-        panel.add(textField, c);
+        lblnomeProduto = new JLabel("Produto:");
+        lblnomeProduto.setBounds(15, 15, 100, 30);
+        txtnomeProduto = new JTextField();
+        txtnomeProduto.setBounds(115, 15, 250, 30);
 
-        // Label e TextField para a Data de entrada
-        JLabel label3 = new JLabel("Data de entrada:");
-        c.gridx = 0;
-        c.gridy = 4;
-        panel.add(label3, c);
+        lblqtddProduto = new JLabel("Quantidade:");
+        lblqtddProduto.setBounds(15, 60, 150, 30);
+        txtqtddProduto = new JTextField();
+        txtqtddProduto.setBounds(115, 60, 250, 30);
 
-        JTextField textField3 = new JTextField(20);
-        c.gridx = 0;
-        c.gridy = 5;
-        panel.add(textField3, c);
+        lbldataEntrada = new JLabel("Data de Entrada:");
+        lbldataEntrada.setBounds(15, 105, 100, 30);
+        txtdataEntrada = new JTextField();
+        txtdataEntrada.setBounds(115, 105, 250, 30);
 
-        // Label e JFormattedTextField para o Valor (número real)
-        JLabel label4 = new JLabel("Valor:");
-        c.gridx = 0;
-        c.gridy = 6;
-        panel.add(label4, c);
+        lblvalorProduto = new JLabel("Valor:");
+        lblvalorProduto.setBounds(15, 150, 120, 30);
+        txtvalorProduto = new JTextField();
+        txtvalorProduto.setBounds(115, 150, 250, 30);
+        
+        btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(this);
+        
+        Color corbtnVoltar = new Color(243, 215, 241);
+        btnVoltar.setBackground(corbtnVoltar);
+        
+        btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.addActionListener(this);
+        
+        Color corbtnCadastrar = new Color(60, 179, 113);
+        btnCadastrar.setBackground(corbtnCadastrar);
 
-        NumberFormat format = NumberFormat.getNumberInstance(); // Formato de número
-        JFormattedTextField textField4 = new JFormattedTextField(format);
-        textField4.setColumns(10); // Defina o número de colunas desejado
-        c.gridx = 0;
-        c.gridy = 7;
-        panel.add(textField4, c);
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(this);
+        
+        Color corbtnCancelar = new Color(165, 42, 42);
+        btnCancelar.setBackground(corbtnCancelar);
+        
+        painelBotao.add(btnVoltar);
+        painelBotao.add(btnCadastrar);
+        painelBotao.add(btnCancelar);
+        painelBotao.setBackground(new Color(224,255,255));
 
-        // Adicionar um botão "Enviar"
-        JButton customButton = new JButton("Enviar");
-        c.gridx = 0;
-        c.gridy = 8;
-        customButton.setPreferredSize(tamanhoBotaoEnviar);
-        customButton.setBackground(corButton);
-        //customButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1);
+        painelCenter.add(lblnomeProduto);
+        painelCenter.add(txtnomeProduto);
+        painelCenter.add(lblqtddProduto);
+        painelCenter.add(txtqtddProduto);
+        painelCenter.add(lbldataEntrada);
+        painelCenter.add(txtdataEntrada);
+        painelCenter.add(lblvalorProduto);
+        painelCenter.add(txtvalorProduto);
 
-        // Configurar a ação do botão "Enviar" (adicionar ActionListener)
-        customButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Código a ser executado quando o botão "Enviar" for clicado
-            }
-        });
+    }
 
-        panel.add(customButton, c);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCadastrar) {
+            cadastrarProduto();
+            listarProduto();
+        } else if (e.getSource() == btnCancelar) {
+            dispose();
+        } /*else if (e.getSource() == btnVoltar) {
+            dispose(); // Fecha a janela atual
+            btnVoltar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Código para lidar com a ação de miControle
+                    dispose();
+                    PrincipalView principal = new PrincipalView();
+                    principal.setVisible(true);// Abra a nova tela ou execute a ação desejada para voltar
+                });
+        }*/
+    }
+
+    public void cadastrarProduto() {
+        String nomeProduto = txtnomeProduto.getText();
+        int qtddProduto = Integer.parseInt(txtqtddProduto.getText());
+        long dataEntrada = Long.parseLong(txtdataEntrada.getText());
+        double valorProduto = Double.parseDouble(txtvalorProduto.getText());
+        ProdutoController produtoController = new ProdutoController();
+        boolean resultado = produtoController.adicionarProduto(nomeProduto, qtddProduto, dataEntrada, valorProduto);
+    }
+
+    private void listarProduto() {
+        ProdutoController produtoController = new ProdutoController();
+        java.util.List<String[]> produtosDados = produtoController.listarProdutos();
+        for (String[] dados : produtosDados) {
+            System.out.println(dados[0] + "\t" + dados[1] + "\t" + dados[2] + "\t" + dados[3]);
+        }
     }
 
     public static void main(String[] args) {
-        // Criar e exibir a janela
-        CadastrarProduto bijulix = new CadastrarProduto();
-        bijulix.setVisible(true);
+        CadastrarProduto cadastrarProduto = new CadastrarProduto();
+        cadastrarProduto.setVisible(true);
     }
 }
