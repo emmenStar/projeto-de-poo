@@ -6,7 +6,7 @@ CREATE TABLE Cliente(
  nomeCliente varchar(30) NOT NULL,
  nomeProduto varchar(30) NOT NULL,
  dataCompra date NOT NULL,
- valorProduto decimal NOT NULL
+ valorProduto numeric(5,2) NOT NULL
 );
 
 CREATE TABLE Produto(
@@ -14,7 +14,7 @@ CREATE TABLE Produto(
  nomeProduto varchar(100) NOT NULL,
  qtddProduto INT NOT NULL,
  dataEntrada date NOT NULL,
- valor decimal NOT NULL
+ valor numeric(5,2 NOT NULL
 );
 
 select*FROM Cliente;
