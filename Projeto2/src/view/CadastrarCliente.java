@@ -1,128 +1,140 @@
 package view;
 
-import exemplobancodedados.Principal;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
+import control.ClienteController;
+import control.ProdutoController;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class CadastrarCliente extends JFrame {
+public class CadastrarCliente extends JFrame implements ActionListener {
+
+    private JLabel lblnomeCliente, lblnomeProduto, lbldataCompra, lblvalorProduto;
+    private JTextField txtnomeCliente, txtnomeProduto, txtdataCompra, txtvalorProduto;
+    private JPanel painelCenter, painelBotao;
+    private JButton btnVoltar, btnCadastrar, btnCancelar;
+
+    private BorderLayout layoutPai;
+    private FlowLayout layoutBotao;
 
     public CadastrarCliente() {
-        // Configurar o título, tamanho e ação de fechamento da janela
-        setTitle("Cadastrar cliente");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setTitle("Cadastrar Cliente");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Configurar a borda da janela
-        LineBorder borda = new LineBorder(Color.BLACK, 2);
-        getRootPane().setBorder(borda);
+        Container c = getContentPane();
+        
+        layoutPai = new BorderLayout();
+        c.setLayout(layoutPai);
 
-        // Criar um painel com um layout GridBagLayout
-        JPanel panel = new JPanel(new GridBagLayout());
-        add(panel);
-
-        // Configurar a cor de fundo do painel
+        painelCenter = new JPanel();
+        painelCenter.setLayout(null);
+        
         Color corDeFundo = new Color(243, 215, 241);
-        panel.setBackground(corDeFundo);
+        painelCenter.setBackground(corDeFundo);
 
-        // Configuração de GridBagConstraints para o layout GridBagLayout
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(3, 5, 5, 10);
+        painelBotao = new JPanel();
+        layoutBotao = new FlowLayout(FlowLayout.CENTER, 25, 15);
+        painelBotao.setLayout(layoutBotao);
 
-        // Label e TextField para o Cliente
-        JLabel label = new JLabel("Nome do cliente:");
-        c.gridx = 0;
-        c.gridy = 0;
-        panel.add(label, c);
+        c.add(painelCenter, BorderLayout.CENTER);
+        c.add(painelBotao, BorderLayout.SOUTH);
 
-        JTextField textField = new JTextField(20);
-        Dimension smallerSize = new Dimension(10, 20); // Defina as dimensões desejadas (largura x altura)
-        textField.setPreferredSize(smallerSize);
-        c.gridx = 0;
-        c.gridy = 1;
-        panel.add(textField, c);;
+        lblnomeCliente = new JLabel("Cliente:");
+        lblnomeCliente.setBounds(15, 15, 100, 30);
+        txtnomeCliente = new JTextField();
+        txtnomeCliente.setBounds(115, 15, 250, 30);
 
-        // Label para Data
-        JLabel label2 = new JLabel("Produto comprado:");
-        c.gridx = 0;
-        c.gridy = 2;
-        panel.add(label2, c);
+        lblnomeProduto = new JLabel("Produto:");
+        lblnomeProduto.setBounds(15, 60, 150, 30);
+        txtnomeProduto = new JTextField();
+        txtnomeProduto.setBounds(115, 60, 250, 30);
 
-        JTextField textField2 = new JTextField(20);
-        c.gridx = 0;
-        c.gridy = 3;
-        panel.add(textField2, c);
+        lbldataCompra = new JLabel("Data de Compra:");
+        lbldataCompra.setBounds(15, 105, 100, 30);
+        txtdataCompra = new JTextField();
+        txtdataCompra.setBounds(115, 105, 250, 30);
+
+        lblvalorProduto = new JLabel("Valor:");
+        lblvalorProduto.setBounds(15, 150, 120, 30);
+        txtvalorProduto = new JTextField();
+        txtvalorProduto.setBounds(115, 150, 250, 30);
         
-        JLabel label3 = new JLabel("Data de entrada:");
-        c.gridx = 0;
-        c.gridy = 4;
-        panel.add(label3, c);
-
-        JTextField textField3 = new JTextField(20);
-        c.gridx = 0;
-        c.gridy = 5;
-        panel.add(textField3, c);
-
-        // Label e TextField para o Valor
-        JLabel label4 = new JLabel("Valor do produto:");
-        c.gridx = 0;
-        c.gridy = 6;
-        panel.add(label4, c);
-
-        JTextField textField4 = new JTextField(20);
-        c.gridx = 0;
-        c.gridy = 7;
-        panel.add(textField4, c);
-
-        // Adicionar um botão com posição personalizada
-        JButton customButton = new JButton("Enviar");
-        c.gridx = 0; // Defina a posição X desejada
-        c.gridy = 10; // Defina a posição Y desejada
-
-        Color corButton = new Color(60, 179, 113);
-        customButton.setBackground(corButton);
-        customButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-
-        // Ajustar as dimensões do botão
-        Dimension tamanhoBotao = new Dimension(100, 30);
-        customButton.setPreferredSize(tamanhoBotao);
-
-        // Configurar a ação do botão (adicionar ActionListener)
-        customButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Código a ser executado quando o botão for clicado
-            }
-        });
-
-        panel.add(customButton, c);
+        btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(this);
         
-     // Adicionar um botão "Voltar" ao lado do botão "Enviar"
-        JButton btnVoltar = new JButton("Voltar");
-        c.gridx = 1; // Coloca o botão "Voltar" ao lado do botão "Enviar"
-        c.gridy = 0;
-        //btnVoltar.setPreferredSize(tamanhoBotaoEnviar);
-        btnVoltar.setBackground(corButton);
-        //btnVoltar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1);
-
-        btnVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Código para lidar com a ação de miControle
-                dispose();
-                PrincipalView principal = new PrincipalView();
-                principal.setVisible(true);
-            }
-        });
-
-        panel.add(btnVoltar, c);
+        Color corbtnVoltar = new Color(243, 215, 241);
+        btnVoltar.setBackground(corbtnVoltar);
         
+        btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.addActionListener(this);
+        
+        Color corbtnCadastrar = new Color(60, 179, 113);
+        btnCadastrar.setBackground(corbtnCadastrar);
+
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(this);
+        
+        Color corbtnCancelar = new Color(165, 42, 42);
+        btnCancelar.setBackground(corbtnCancelar);
+        
+        painelBotao.add(btnVoltar);
+        painelBotao.add(btnCadastrar);
+        painelBotao.add(btnCancelar);
+        painelBotao.setBackground(new Color(224,255,255));
+
+        painelCenter.add(lblnomeCliente);
+        painelCenter.add(txtnomeCliente);
+        painelCenter.add(lblnomeProduto);
+        painelCenter.add(txtnomeProduto);
+        painelCenter.add(lbldataCompra);
+        painelCenter.add(txtdataCompra);
+        painelCenter.add(lblvalorProduto);
+        painelCenter.add(txtvalorProduto);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnCadastrar) {
+            cadastrarCliente();
+            listarCliente();
+        } else if (e.getSource() == btnCancelar) {
+            dispose();
+        } /*else if (e.getSource() == btnVoltar) {
+            dispose(); // Fecha a janela atual
+            btnVoltar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Código para lidar com a ação de miControle
+                    dispose();
+                    PrincipalView principal = new PrincipalView();
+                    principal.setVisible(true);// Abra a nova tela ou execute a ação desejada para voltar
+                });
+        }*/
+    }
+
+    public void cadastrarCliente() {
+        String nomeCliente = txtnomeCliente.getText();
+        String nomeProduto = txtnomeProduto.getText();
+        long dataCompra = Long.parseLong(txtdataCompra.getText());
+        double valorProduto = Double.parseDouble(txtvalorProduto.getText());
+        ClienteController clienteController = new ClienteController();
+        boolean resultado = clienteController.adicionarCliente(nomeCliente, nomeProduto, dataCompra, valorProduto);
+    }
+
+    private void listarCliente() {
+        ClienteController clienteController = new ClienteController();
+        java.util.List<String[]> clientesDados = clienteController.listarClientes();
+        for (String[] dados : clientesDados) {
+            System.out.println(dados[0] + "\t" + dados[1] + "\t" + dados[2] + "\t" + dados[3]);
+        }
+    }
+
+    public static void main(String[] args) {
+        CadastrarCliente cadastrarCliente = new CadastrarCliente();
+        cadastrarCliente.setVisible(true);
     }
 }
