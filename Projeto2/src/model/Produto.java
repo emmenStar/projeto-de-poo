@@ -8,15 +8,15 @@ public class Produto {
 	private int codigo;
 	private String nomeProduto;
 	private int qtddProduto;
-	private int dataEntrada;
-	private double valor;
+	private long dataEntrada;
+	private double valorProduto;
 	
-	public Produto (int codigo, String nomeProduto, int qtddProduto, int dataEntrada, double valor) {
+	public Produto (int codigo, String nomeProduto, int qtddProduto, long dataEntrada, double valorProduto) {
 		this.codigo = codigo;
 		this.nomeProduto = nomeProduto;
 		this.qtddProduto = qtddProduto;
 		this.dataEntrada = dataEntrada;
-		this.valor = valor;
+		this.valorProduto = valorProduto;
 	}
 
 	public int getCodigo() {
@@ -43,25 +43,29 @@ public class Produto {
 		this.qtddProduto = qtddProduto;
 	}
 
-	public int getDataEntrada() {
+	public long getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(int dataEntrada) {
+	public void setDataEntrada(long dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public double getValor() {
-		return valor;
+	public double getValorProduto() {
+		return valorProduto;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setValorProduto(double valorProduto) {
+		this.valorProduto = valorProduto;
 	}
 	
 	@Override
     public String toString() {
-        return "Produto{" + "Codigo= " + codigo + ", Nome do produto=" + nomeProduto + ", Quantidade de produto=" + qtddProduto + ", Data de entrada=" + dataEntrada + ", Valor do produto=" + valor + '}';
+        return "Produto{" + "Codigo= " + codigo + 
+        		", Nome do produto=" + nomeProduto + 
+        		", Quantidade de produto=" + qtddProduto + 
+        		", Data de entrada=" + dataEntrada + 
+        		", Valor do produto=" + valorProduto + '}';
     }
     
     public boolean cadastrar(){
@@ -70,9 +74,5 @@ public class Produto {
     
     public static List<Produto> listarProdutos(){
         return ProdutoDAO.listarProdutos();
-    }
-
-    public static List<Produto> listarProdutosPorNome(String nome){
-        return ProdutoDAO.listarProdutosPorNome(nome);
-    }  
+    } 
 }
