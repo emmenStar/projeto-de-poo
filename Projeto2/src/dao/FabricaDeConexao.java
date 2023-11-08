@@ -9,9 +9,9 @@ public class FabricaDeConexao {
 	public static Connection getConexao(){
             
             try{
-		String database = "jdbc:mysql://127.0.0.1:3306/AULAJAVA";
-		String usuario = "juan_aula";
-		String senha = "juan_aula";
+		String database = "jdbc:mysql://127.0.0.1:3306/GERENCIAMENTO";
+		String usuario = "julhinha";
+		String senha = "1701";
                 Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conexao = DriverManager.getConnection(database, usuario, senha);
 		return conexao;
